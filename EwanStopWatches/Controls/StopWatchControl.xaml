@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EwanStopWatches.Controls.StopWatchControl">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <!-- Stopwatch Name -->
+        <Label 
+            Text="{Binding Name}"
+            FontSize="24"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            TextColor="{AppThemeBinding Light=#1f1f1f, Dark=#ffffff}" />
+
+        <!-- Elapsed Time Display -->
+        <Frame 
+            BorderColor="{AppThemeBinding Light=#e0e0e0, Dark=#3e3e3e}"
+            CornerRadius="10"
+            HasShadow="True"
+            Padding="20">
+            <Label 
+                Text="{Binding ElapsedTime, StringFormat='{0} ms'}"
+                FontSize="48"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="{AppThemeBinding Light=#512BD4, Dark=#C399E5}" />
+        </Frame>
+
+        <!-- Status Indicator -->
+        <Label 
+            Text="{Binding IsRunning, StringFormat='Status: {0:Running;Stopped}'}"
+            FontSize="14"
+            HorizontalOptions="Center"
+            TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+
+        <!-- Control Buttons -->
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button 
+                Text="Start"
+                Padding="15,10"
+                CornerRadius="8"
+                BackgroundColor="#512BD4"
+                TextColor="White"
+                FontAttributes="Bold" />
+
+            <Button 
+                Text="Stop"
+                Padding="15,10"
+                CornerRadius="8"
+                BackgroundColor="#DC3545"
+                TextColor="White"
+                FontAttributes="Bold" />
+
+            <Button 
+                Text="Reset"
+                Padding="15,10"
+                CornerRadius="8"
+                BackgroundColor="#6C757D"
+                TextColor="White"
+                FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
+        <!-- Time Details (Optional) -->
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Padding="10">
+            <Label Text="Start:" Grid.Column="0" Grid.Row="0" FontSize="12" TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+            <Label Text="{Binding StartTime}" Grid.Column="1" Grid.Row="0" FontSize="12" HorizontalTextAlignment="End" />
+
+            <Label Text="End:" Grid.Column="0" Grid.Row="1" FontSize="12" TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+            <Label Text="{Binding EndTime}" Grid.Column="1" Grid.Row="1" FontSize="12" HorizontalTextAlignment="End" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>
