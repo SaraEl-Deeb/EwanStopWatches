@@ -2,9 +2,20 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EwanStopWatches.Controls.StopWatchControl">
+
     <VerticalStackLayout Padding="20" Spacing="15">
+        <ImageButton
+            Source="bin.png"
+            WidthRequest="36"
+            HeightRequest="36"
+            Padding="6"
+            HorizontalOptions="End"
+            BackgroundColor="Transparent"
+            Aspect="AspectFit"
+            SemanticProperties.Description="Delete stopwatch"
+            Clicked="OnDeleteClicked" />
         <!-- Stopwatch Name -->
-        <Label 
+        <Editor 
             Text="{Binding Name}"
             FontSize="24"
             FontAttributes="Bold"
@@ -26,13 +37,6 @@
                 TextColor="{AppThemeBinding Light=#512BD4, Dark=#C399E5}" />
         </Frame>
 
-        <!-- Status Indicator -->
-        <Label 
-            Text="{Binding IsRunning, StringFormat='Status: {0:Running;Stopped}'}"
-            FontSize="14"
-            HorizontalOptions="Center"
-            TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
-
         <!-- Control Buttons -->
         <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
             <Button 
@@ -41,7 +45,8 @@
                 CornerRadius="8"
                 BackgroundColor="#512BD4"
                 TextColor="White"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                Command="{Binding StartStopWatchCommand}" />
 
             <Button 
                 Text="Stop"
@@ -49,7 +54,8 @@
                 CornerRadius="8"
                 BackgroundColor="#DC3545"
                 TextColor="White"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                Command="{Binding StopWatchCommand}" />
 
             <Button 
                 Text="Reset"
@@ -57,7 +63,8 @@
                 CornerRadius="8"
                 BackgroundColor="#6C757D"
                 TextColor="White"
-                FontAttributes="Bold" />
+                FontAttributes="Bold" 
+                Command="{Binding ResetStopWatchCommand}"/>
         </HorizontalStackLayout>
 
         <!-- Time Details (Optional) -->

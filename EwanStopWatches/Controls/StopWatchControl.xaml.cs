@@ -4,7 +4,7 @@ namespace EwanStopWatches.Controls;
 public partial class StopWatchControl : ContentView
 {
 	readonly StopWatchPageModel _PM;
-
+	public event EventHandler? DeleteRequested;
 	public StopWatchControl()
 	{
 		_PM = new StopWatchPageModel { Name = "Stopwatch" };
@@ -18,4 +18,9 @@ public partial class StopWatchControl : ContentView
 		BindingContext = _PM;
 		InitializeComponent();
 	}
+
+	private void OnDeleteClicked(object sender, EventArgs e)
+	{
+		DeleteRequested?.Invoke(this, EventArgs.Empty);
+    }
 }

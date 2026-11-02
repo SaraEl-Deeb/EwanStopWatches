@@ -1,24 +1,43 @@
-﻿namespace EwanStopWatches
+﻿using EwanStopWatches.Controls;
+using EwanStopWatches.PageModels;
+
+namespace EwanStopWatches;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private int _stopwatchCount = 1;
+
+    public MainPage()
     {
-        int count = 0;
+        InitializeComponent();
 
-        public MainPage()
+        foreach (StopWatchControl stopwatch in StopwatchesLayout.Children.OfType<StopWatchControl>())
         {
-            InitializeComponent();
-        }
-
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            stopwatch.DeleteRequested += OnDeleteStopwatchRequested;
         }
     }
+
+    private void OnAddStopwatchClicked(object sender, EventArgs e)
+    {
+        _stopwatchCount++;
+
+        StopWatchPageModel pageModel = new()
+        {
+            Name = $"Stopwatch {_stopwatchCount}"
+        };
+
+        StopWatchControl stopwatchControl = new(pageModel);
+
+        StopwatchesLayout.Children.Add(stopwatchControl);
+    }
+    
+    private void OnDeleteStopwatchRequested(object? sender, EventArgs e)
+    {
+        if(sender is StopWatchControl stopwatchControl)
+        {
+            stopwatchControl.DeleteRequested -= OnDeleteStopwatchRequested;
+            StopwatchesLayout.Children.Remove(stopwatchControl);
+        }
+    }
+
 }
