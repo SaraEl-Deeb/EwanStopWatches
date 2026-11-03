@@ -22,6 +22,7 @@
                 x:Name="StopwatchesLayout"
                 Spacing="25">
                 <ctrls:StopWatchControl />
+                <BoxView HeightRequest="1" Color="Gray" Margin="10,0" HorizontalOptions="Fill"></BoxView>
             </VerticalStackLayout>
 
         </VerticalStackLayout>

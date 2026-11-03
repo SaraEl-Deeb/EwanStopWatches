@@ -1,5 +1,7 @@
 ﻿using EwanStopWatches.Controls;
 using EwanStopWatches.PageModels;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace EwanStopWatches;
 
@@ -28,15 +30,43 @@ public partial class MainPage : ContentPage
 
         StopWatchControl stopwatchControl = new(pageModel);
 
+        stopwatchControl.DeleteRequested += OnDeleteStopwatchRequested;
         StopwatchesLayout.Children.Add(stopwatchControl);
+
+        //Add a splitter
+        var splitter = new BoxView {
+            HeightRequest = 1,
+            BackgroundColor = Colors.Gray,
+            HorizontalOptions = LayoutOptions.Fill,
+            Margin = new Thickness(0,10,0,10)
+        };
+        StopwatchesLayout.Children.Add(splitter);
     }
-    
-    private void OnDeleteStopwatchRequested(object? sender, EventArgs e)
+
+    private async void OnDeleteStopwatchRequested(object? sender, EventArgs e)
     {
-        if(sender is StopWatchControl stopwatchControl)
+        if (sender is StopWatchControl stopwatchControl)
         {
-            stopwatchControl.DeleteRequested -= OnDeleteStopwatchRequested;
-            StopwatchesLayout.Children.Remove(stopwatchControl);
+            bool confirm = await DisplayAlert(
+            "Delete Stopwatch",
+        "Are you sure you want to delete " + ((StopWatchPageModel)stopwatchControl.BindingContext).Name,
+        "Delete",
+        "Cancel");
+
+            if (confirm)
+            {
+                int index = StopwatchesLayout.Children.IndexOf(stopwatchControl);
+
+                //Remove the splitter (if exists)
+                if (index + 1 < StopwatchesLayout.Children.Count && StopwatchesLayout.Children[index + 1] is BoxView)
+                {
+                    StopwatchesLayout.Children.RemoveAt(index + 1);
+                }
+                stopwatchControl.DeleteRequested -= OnDeleteStopwatchRequested;
+                StopwatchesLayout.Children.Remove(stopwatchControl);
+
+
+            }
         }
     }
 

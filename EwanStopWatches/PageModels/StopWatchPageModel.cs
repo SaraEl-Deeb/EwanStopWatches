@@ -20,7 +20,7 @@ public partial class StopWatchPageModel : ObservableObject
     private TimeOnly startTime = TimeOnly.MinValue;
 
     [ObservableProperty]
-    private TimeOnly endTime = TimeOnly.MinValue;
+    private TimeOnly endTime = TimeOnly.Parse("00:00:00");
 
     [ObservableProperty]
     private string elapsedTime = "00:00:00";
@@ -37,7 +37,7 @@ public partial class StopWatchPageModel : ObservableObject
         }
 
         StartTime = TimeOnly.FromDateTime(DateTime.Now);
-        EndTime = TimeOnly.MinValue;
+        EndTime = TimeOnly.Parse("00:00:00");
         IsRunning = true;
 
         _stopwatch.Restart();
@@ -71,7 +71,7 @@ public partial class StopWatchPageModel : ObservableObject
         _stopwatch.Reset();
 
         StartTime = TimeOnly.MinValue;
-        EndTime = TimeOnly.MinValue;
+        EndTime = TimeOnly.Parse("00:00:00");
         ElapsedTime = "00:00:00";
         IsRunning = false;
     }

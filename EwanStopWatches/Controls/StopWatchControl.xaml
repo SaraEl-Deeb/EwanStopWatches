@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EwanStopWatches.Controls.StopWatchControl">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="10" Spacing="15">
         <ImageButton
             Source="bin.png"
             WidthRequest="36"
@@ -17,7 +17,7 @@
         <!-- Stopwatch Name -->
         <Editor 
             Text="{Binding Name}"
-            FontSize="24"
+            FontSize="20"
             FontAttributes="Bold"
             HorizontalOptions="Center"
             TextColor="{AppThemeBinding Light=#1f1f1f, Dark=#ffffff}" />
@@ -27,10 +27,11 @@
             BorderColor="{AppThemeBinding Light=#e0e0e0, Dark=#3e3e3e}"
             CornerRadius="10"
             HasShadow="True"
-            Padding="20">
+            Padding="20"
+            WidthRequest="300">
             <Label 
                 Text="{Binding ElapsedTime, StringFormat='{0} ms'}"
-                FontSize="48"
+                FontSize="40"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
@@ -68,7 +69,7 @@
         </HorizontalStackLayout>
 
         <!-- Time Details (Optional) -->
-        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Padding="10">
+        <Grid ColumnDefinitions="100,100" RowDefinitions="Auto,Auto" Padding="0" HorizontalOptions="Center">
             <Label Text="Start:" Grid.Column="0" Grid.Row="0" FontSize="12" TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
             <Label Text="{Binding StartTime}" Grid.Column="1" Grid.Row="0" FontSize="12" HorizontalTextAlignment="End" />
 
@@ -76,4 +77,5 @@
             <Label Text="{Binding EndTime}" Grid.Column="1" Grid.Row="1" FontSize="12" HorizontalTextAlignment="End" />
         </Grid>
     </VerticalStackLayout>
+    
 </ContentView>
