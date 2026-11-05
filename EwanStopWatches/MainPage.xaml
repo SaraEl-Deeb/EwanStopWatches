@@ -24,7 +24,12 @@
                 <ctrls:StopWatchControl />
                 <BoxView HeightRequest="1" Color="Gray" Margin="10,0" HorizontalOptions="Fill"></BoxView>
             </VerticalStackLayout>
-
+            <ImageButton
+                Source="shutdown.png"
+                Padding="15,10"
+                WidthRequest="100"
+                HorizontalOptions="Center"
+                Clicked="OnShutdownClicked" />
         </VerticalStackLayout>
     </ScrollView>
 

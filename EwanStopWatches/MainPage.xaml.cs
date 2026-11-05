@@ -70,4 +70,8 @@ public partial class MainPage : ContentPage
         }
     }
 
+    private void OnShutdownClicked(object sender, EventArgs e)
+    {
+        Services.ForegroundServiceHelper.StopMyForegroundService();
+    }
 }
